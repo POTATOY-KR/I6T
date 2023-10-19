@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I6T</title>
+</head>
+<body>
+    <h1>인천광역시 중구 헬스케어 서비스</h1>
+    <div style="border: 1px solid gold; float: left; width: 80%; padding:10px;">
+        좌표 지정 페이지
+        <div class="container"> 
+           <fieldset> 
+             <form action="/" method="post"> 
+                <input name="px" id="max" type="text" class="ghost-input" placeholder="x좌표" value="<%= px %>" required> 
+                <input name="py" id="may" type="text" class="ghost-input" placeholder="y좌표" value="<%= py %>" required> 
+               <input type="submit" class="ghost-button" value="확인">
+               <input type="submit" class="ghost-button" value="기본값 초기화" onclick="resetdata()">
+               <script type="text/javascript">
+                function resetdata(){
+                    document.getElementById('max').value = 126.6215880;
+                    document.getElementById('may').value = 37.4737810;
+                }
+               </script>
+             </form> 
+           </fieldset> 
+         </div>
+    <div id="map" style="width:350px;height:350px; margin:20px;"></div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2895f73bce01cc365383c67547abdd2f"></script>
+    <script>
+        var container = document.getElementById('map');
+        var dax = document.getElementById('max').value;
+        var datax = parseFloat(dax);
+        var day = document.getElementById('may').value;
+        var datay = parseFloat(day);
+        var options = { 
+            center: new kakao.maps.LatLng(datay, datax), 
+            level: 3 
+        };
+        var map = new kakao.maps.Map(container, options);
+        var marker = new kakao.maps.Marker({position:map.getCenter()});
+        marker.setMap(map);
+        kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+            var latlng = mouseEvent.latLng; 
+            marker.setPosition(latlng);
+            document.getElementById('max').value = parseFloat(latlng.getLng());
+            document.getElementById('may').value = parseFloat(latlng.getLat());
+        });
+    </script>
+    </div>
+    <div style="border: 1px solid red; float: left; width: 20%; padding:10px;">
+        근처 헬스장 찾기
+        <input type="submit" class="ghost-button" value="OK" onclick="gogympage()">
+        <script type="text/javascript">
+            function gogympage(){
+                var dax = document.getElementById('max').value;
+                var day = document.getElementById('may').value;
+                if(!isNaN(dax)&&!isNaN(day))location.href = "/gyms?px="+dax+"&py="+day;
+            }
+        </script>
+    </div>
+    <div style="border: 1px solid blue; float: left; width: 20%; padding:10px;">
+        근처 음식점 찾기
+        <input type="submit" class="ghost-button" value="OK" onclick="gorestpage()">
+        <script type="text/javascript">
+            function gorestpage(){
+                var dax = document.getElementById('max').value;
+                var day = document.getElementById('may').value;
+                if(!isNaN(dax)&&!isNaN(day))location.href = "/restaurants?px="+dax+"&py="+day;
+            }
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I6T</title>
+</head>
+
+<body>
+    <div style="border: 1px solid gold; width: 80%; padding:10px;">
+        음식점 정보 출력 페이지
+        <h3>
+            <%= listlength %>개의 데이터 확인
+        </h3>
+    </div>
+    <div style="border: 1px solid grey; width:80%; padding:10px;">
+        <% for(var i=0; i < contents.length; i++){ %>
+            <div>
+                <ul>
+                    <li>상호명 : <%= contents[i]["상호명"] %>
+                    </li>
+                    <li>도로명 주소 : <%= contents[i]["도로명주소"] %>
+                    </li>
+                    <li>전화번호 : <%= contents[i]["전화번호"] %>
+                    </li>
+                    <li>음식유형 : <%= contents[i]["음식유형"] %>
+                    </li>
+                    <li>경도 : <%= contents[i]["px"] %>
+                    </li>
+                    <li>위도 : <%= contents[i]["py"] %>
+                    </li>
+                    <li>주요메뉴 : <%= contents[i]["주요음식"] %>
+                    </li>
+                </ul>
+
+                <div style="border: 1px solid red; width: 50%; padding:10px;">
+                    음식 영양성분 확인
+                    <input type="submit" class="ghost-button" value="OK" onclick="gonutpage_<%= contents[i]["restaurantCode"] %>()">
+                    <script type="text/javascript">
+                        function gonutpage_<%= contents[i]["restaurantCode"] %>() {
+                            location.href = "/restaurants/menu?restaurantNumber=<%= contents[i]["restaurantCode"] %>";
+                        }
+                    </script>
+                </div>
+
+            </div>
+            <% } %>
+    </div>
+   
+    <div style="border: 1px solid rgb(0, 242, 255); float: left; width: 90%; padding:10px;">
+        <input type="submit" class="ghost-button" value="돌아가기" onclick="gomainpage()">
+        <script type="text/javascript">
+            function gomainpage() {
+                location.href = "/";
+            }
+        </script>
+    </div>
+</body>
+
+</html>

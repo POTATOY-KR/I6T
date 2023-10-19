@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I6T</title>
+</head>
+<body>
+    <div style="border: 1px solid gold; width: 80%; padding:10px;">
+        음식 영양성분 정보 출력 페이지
+    </div>
+    <div>
+
+    <% if (contents.length > 0){ %>
+        <% for(var i = 0; i < contents.length; i++){ %>
+            <ul>
+                <li>식품이름 : <%= contents[i]["식품이름"] %></li>
+                <li>1회제공량 : <%= contents[i]["1회제공량"] %></li>
+                <li>열량 : <%= contents[i]["열량"] %></li>
+                <li>탄수화물 : <%= contents[i]["탄수화물"] %></li>
+                <li>단백질 : <%= contents[i]["단백질"] %></li>
+                <li>지방 : <%= contents[i]["지방"] %></li>
+                <li>당류 : <%= contents[i]["당류"] %></li>
+                <li>나트륨 : <%= contents[i]["나트륨"] %></li>
+                <li>콜레스테롤 : <%= contents[i]["콜레스테롤"] %></li>
+                <li>포화지방산 : <%= contents[i]["포화지방산"] %></li>
+                <li>트랜스지방산 : <%= contents[i]["트랜스지방산"] %></li>
+            </ul>
+            <br>
+        <% } %>
+    <% } else { %>
+        <div>
+            <h3>가능한 데이터가 없어요...</h3>
+        </div>
+    <% } %>
+    
+
+    
+    
+</div>
+    <div style="border: 1px solid rgb(0, 242, 255); float: left; width: 90%; padding:10px;">
+        <input type="submit" class="ghost-button" value="돌아가기" onclick="gomainpage()">
+        <script type="text/javascript">
+            function gomainpage(){
+                location.href = "/";
+            }
+        </script>
+    </div>
+</body>
+</html>
